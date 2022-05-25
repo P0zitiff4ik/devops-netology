@@ -30,6 +30,7 @@ Date:   Thu Mar 5 20:56:10 2020 +0000
 
 56cd7859e05c36c06b56d013b55a252d0bb7e158 9ea88f22fc6269854151c571162c5bcf958bee2b
 
+
 ### 4.  Перечислите хеши и комментарии всех коммитов которые были сделаны между тегами v0.12.23 и v0.12.24.
 >	$ git log v0.12.23...v0.12.24 --oneline
 
@@ -53,6 +54,7 @@ dd01a3507 Update CHANGELOG.md
 
 225466bc3 Cleanup after v0.12.23 release
 
+
 ### 5. Найдите коммит в котором была создана функция `func providerSource`, ее определение в коде выглядит так `func providerSource(...)` (вместо троеточего перечислены аргументы).
 >	$ git log -SproviderSource --oneline
 
@@ -72,20 +74,29 @@ plugin/discovery/get.go
 235:    printedProviderName := fmt.Sprintf("%q (%s)", provider.LegacyString(), providerSource)
 
 
-
 ### 6. Найдите все коммиты в которых была изменена функция `globalPluginDirs`
->	$ git log -SglobalPluginDirs --oneline
+**Определяем файлы, в которых есть эта функция:**
 
-35a058fb3 main: configure credentials from the CLI config file
+> $ git grep --heading -n -p "func globalPluginDirs("
 
-c0b176109 prevent log output during init
+plugins.go
 
-8364383c3 Push plugin discovery down into command package
+3=import (
 
-! Во втором коммите было только упоминание в файле config_unix.go
+16:func globalPluginDirs() []string {
+
+**Теперь выполняем поиск коммитов, в которых изменялся файл *plugins.go***
+
+>	$ git log -L :globalPluginDirs:plugins.go -s --pretty=oneline
+
+* 52dbf94834cb970b510f2fba853a5b49ad9b1a46 keep .terraform.d/plugins for discovery
+* 41ab0aef7a0fe030e84018973a64135b11abcd70 Add missing OS_ARCH dir to global plugin paths
+* 66ebff90cdfaa6938f26f908c7ebad8d547fea17 move some more plugin search path logic to command
+* 8364383c359a6b738a436d1b7745ccdce178df47 Push plugin discovery down into command package
+
 
 ### 7. Кто автор функции `synchronizedWriters`?
 Martin Atkins
->	$ git log -SsynchronizedWriters --pretty="%h - %an, %ar: %s"
+>	$ git log -S "func synchronizedWriters(" --pretty="%h - %an, %ar: %s"
 
 5ac311e2a - Martin Atkins, 5 лет назад: main: synchronize writes to VT100-faker on Windows
