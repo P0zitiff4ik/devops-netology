@@ -111,7 +111,7 @@ done
 ### Ваш скрипт:
 ```bash
 #!/usr/bin/env bash 
-commitRegex='^([[:digit:]]*-[[:alpha:]]*-[[:digit:]]*-[[:alpha:]]*)'
+commitRegex='^([[[:digit:]]*-[[:alpha:]]*-[[:digit:]]*-[[:alpha:]]*] *)'
 if ! grep -qE "$commitRegex" "$1"; then
     echo "Aborting according commit message policy. Please specify [number-module-number-lesson] message."
     exit 1
