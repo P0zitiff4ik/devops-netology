@@ -111,9 +111,14 @@ done
 ### Ваш скрипт:
 ```bash
 #!/usr/bin/env bash 
-commitRegex='^([[[:digit:]]*-[[:alpha:]]*-[[:digit:]]*-[[:alpha:]]*] *)'
+commitRegex='^([[0-9]-[^0-9]-[0-9]-[^0-9]] *)'
+symbolCount=
 if ! grep -qE "$commitRegex" "$1"; then
-    echo "Aborting according commit message policy. Please specify [number-module-number-lesson] message."
+    echo "Aborting according commit message policy. Please specify <[number-module-number-lesson] message>."
+    exit 1
+elif ! wc -m "$1" -gt "30"; then 
+    echo "Aborting according commit message policy. Please check that the number of symbols is less than 30."
     exit 1
 fi
+exit 0
 ```
