@@ -95,6 +95,7 @@ do
         then
           echo $host >> error.log
           count=1
+          break
       fi
     done
   let "count -=1"
