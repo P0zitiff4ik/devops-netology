@@ -119,17 +119,29 @@ fatal: не найден git репозиторий (или один из род
 #!/usr/bin/env python3
 
 import socket
+import time
 
-hosts = ('drive.google.com', 'mail.google.com', 'google.com')
-for host in hosts:
-    ip = socket.gethostbyname(host)
-    print(host, "-", ip)
+hosts = {'mail.ru':'94.100.180.200', 'vk.com':'87.240.137.164', 'yandex.ru':'5.255.255.5'}
+while True:
+    for host, ip in hosts.items():
+        newip = socket.gethostbyname(host) 
+        if newip != ip:
+            print(f'[ERROR] {host} IP mismatch: {ip} {newip}')
+            hosts[ip] = newip
+        else:
+            print(f'{host} - {ip}')
+    time.sleep(2)
     
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+$ ./1.py
+[ERROR] mail.ru IP mismatch: 94.100.180.200 94.100.180.201
+Traceback (most recent call last):
+  File "/home/pozitiff4ik/./1.py", line 8, in <module>
+    for host, ip in hosts.items():
+RuntimeError: dictionary changed size during iteration
 ```
 
 ------
