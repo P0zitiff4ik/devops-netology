@@ -127,7 +127,7 @@ while True:
         newip = socket.gethostbyname(host) 
         if newip != ip:
             print(f'[ERROR] {host} IP mismatch: {ip} {newip}')
-            hosts[ip] = newip
+            hosts[host] = newip
         else:
             print(f'{host} - {ip}')
     time.sleep(2)
