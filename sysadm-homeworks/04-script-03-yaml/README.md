@@ -71,7 +71,6 @@ while True:
                 js.write(json.dumps(hosts, indent=2))
     time.sleep(2)
 
-
 ```
 
 ### Вывод скрипта при запуске при тестировании:
