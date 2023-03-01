@@ -63,11 +63,6 @@ Hello, Netology!
 
 ### 4. Соберите Docker образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам
 
-Получаю ошибку при сборке image, как при использовании Dockerfile [отсюда](https://github.com/netology-code/virt-video-code/blob/main/docker/Dockerfile), так и [отсюда](https://github.com/netology-code/virt-homeworks/blob/virt-11/05-virt-03-docker/src/build/ansible/Dockerfile)
+https://hub.docker.com/r/pozitiff4ik/myansible
 
-
-```bash
-ERROR: Cannot uninstall 'packaging'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
-------
-executor failed running [/bin/sh -c CARGO_NET_GIT_FETCH_WITH_CLI=1 &&     apk --no-cache add         sudo         python3        py3-pip         openssl         ca-certificates         sshpass         openssh-client         rsync         git &&     apk --no-cache add --virtual build-dependencies         python3-dev         libffi-dev         musl-dev         gcc         cargo         openssl-dev         libressl-dev         build-base &&     pip install --upgrade pip wheel &&     pip install --upgrade cryptography cffi &&     pip uninstall ansible-base &&     pip install ansible-core &&     pip install ansible==2.10.0 &&     pip install mitogen ansible-lint jmespath &&     pip install --upgrade pywinrm &&     apk del build-dependencies &&     rm -rf /var/cache/apk/* &&     rm -rf /root/.cache/pip &&     rm -rf /root/.cargo]: exit code: 1
-```
+---

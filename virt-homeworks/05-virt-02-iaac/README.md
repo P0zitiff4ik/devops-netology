@@ -25,11 +25,13 @@
 VirtualBox:
 > Графический интерфейс VirtualBox
 > Версия 7.0.4 r154605 (Qt5.15.2)
+
 Vagrant:
 ```shell
 $ vagrant --version
 Vagrant 2.3.4
 ```
+
 Ansible:
 ```shell
 $ ansible --version
