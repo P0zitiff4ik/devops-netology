@@ -285,4 +285,5 @@ $ docker run --rm -d -e POSTGRES_USER=test-admin-user -e POSTGRES_PASSWORD=netol
 ```shell
 $ export PGPASSWORD=netology && psql -h localhost -U test-admin-user -f $(ls -1trh /home/pozitiff4ik/backup/*.backup) test_db
 ```
+
 ---
