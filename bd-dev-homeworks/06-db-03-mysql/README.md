@@ -68,7 +68,7 @@ Server version:         8.0.34 MySQL Community Server - GPL
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-Предоставьте привелегии пользователю test на операции SELECT базы test_db.
+Предоставьте привилегии пользователю test на операции SELECT базы test_db.
 
 ```sql
 > GRANT SELECT ON test_db.* TO 'test'@'localhost';
