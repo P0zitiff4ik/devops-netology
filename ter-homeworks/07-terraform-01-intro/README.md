@@ -293,4 +293,5 @@ Changes to Outputs:
 <details><summary>Скриншот:</summary>
 ![img.png](img.png)
 </details>
+
 ------
