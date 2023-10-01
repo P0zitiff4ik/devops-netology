@@ -258,9 +258,9 @@ Plan: 0 to add, 1 to change, 0 to destroy.
 
 ---
 
-<details><summary>Задания повышенной сложности</summary>
-
 ### Задание 4*
+
+<details><summary>Описание:</summary>
 
 1. Измените модуль vpc так, чтобы он мог создать подсети во всех зонах доступности, переданных в переменной типа list(object) при вызове модуля.  
   
@@ -287,6 +287,211 @@ module "vpc_dev" {
 
 Предоставьте код, план выполнения, результат из консоли YC.
 
+</details>
+
+**Ответ:**
+
+[Код (vpc-main.tf)](./src/vpc/main.tf)
+
+<details><summary>План выполнения:</summary>
+
+```terraform
+$ terraform plan
+data.template_file.cloudinit: Reading...
+data.template_file.cloudinit: Read complete after 0s [id=91b26504d63395d9bb30260027e7447e1b1f9238aefaeb3b72e3314b8df35c5f]
+module.test-vm.data.yandex_compute_image.my_image: Reading...
+module.test-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8o6khjbdv3f1suqf69]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.test-vm.yandex_compute_instance.vm[0] will be created
+  + resource "yandex_compute_instance" "vm" {
+      + allow_stopping_for_update = true
+      + created_at                = (known after apply)
+      + description               = "TODO: description; {{terraform managed}}"
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = "develop-web-0"
+      + id                        = (known after apply)
+      + labels                    = {
+          + "env"     = "develop"
+          + "project" = "undefined"
+        }
+      + metadata                  = {
+          + "serial-port-enable" = "1"
+          + "user-data"          = <<-EOT
+                #cloud-config
+                users:
+                  - name: ubuntu
+                    groups: sudo
+                    shell: /bin/bash
+                    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+                    ssh_authorized_keys:
+                      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOZg2+u0uMeAskVRWa8dtvT8wO8Qydp+x+7A0Hd6+gWJ pozitiff4ik@Zoon-PC
+                
+                package_update: true
+                package_upgrade: false
+                packages:
+                  - vim
+                  - nginx
+            EOT
+        }
+      + name                      = "develop-web-0"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8o6khjbdv3f1suqf69"
+              + name        = (known after apply)
+              + size        = 10
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 5
+          + cores         = 2
+          + memory        = 1
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # module.vpc_dev.yandex_vpc_network.network will be created
+  + resource "yandex_vpc_network" "network" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "develop"
+      + subnet_ids                = (known after apply)
+    }
+
+  # module.vpc_dev.yandex_vpc_subnet.subnet["0"] will be created
+  + resource "yandex_vpc_subnet" "subnet" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "develop-ru-central1-a"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.1.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+  # module.vpc_prod.yandex_vpc_network.network will be created
+  + resource "yandex_vpc_network" "network" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "production"
+      + subnet_ids                = (known after apply)
+    }
+
+  # module.vpc_prod.yandex_vpc_subnet.subnet["0"] will be created
+  + resource "yandex_vpc_subnet" "subnet" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "production-ru-central1-a"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.1.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+  # module.vpc_prod.yandex_vpc_subnet.subnet["1"] will be created
+  + resource "yandex_vpc_subnet" "subnet" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "production-ru-central1-b"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.2.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-b"
+    }
+
+  # module.vpc_prod.yandex_vpc_subnet.subnet["2"] will be created
+  + resource "yandex_vpc_subnet" "subnet" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "production-ru-central1-c"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.3.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-c"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + external_ip = [
+      + (known after apply),
+    ]
+```
+
+</details>
+
+<details><summary>Результат в YC::</summary>
+
+![img_1.png](img_1.png)
+
+</details>
+
+---
+
+<details><summary>Задание 5, которе я не выполнил</summary>
+
 ### Задание 5*
 
 1. Напишите модуль для создания кластера managed БД Mysql в Yandex Cloud с одним или тремя хостами в зависимости от переменной HA=true или HA=false. Используйте ресурс yandex_mdb_mysql_cluster: передайте имя кластера и id сети.
@@ -294,7 +499,13 @@ module "vpc_dev" {
 3. Используя оба модуля, создайте кластер example из одного хоста, а затем добавьте в него БД test и пользователя app. Затем измените переменную и превратите сингл хост в кластер из 2-х серверов.
 4. Предоставьте план выполнения и по возможности результат. Сразу же удаляйте созданные ресурсы, так как кластер может стоить очень дорого. Используйте минимальную конфигурацию.
 
+</details>
+
+---
+
 ### Задание 6*
+
+<details><summary>Описание:</summary>
 
 1. Разверните у себя локально vault, используя docker-compose.yml в проекте.
 2. Для входа в web-интерфейс и авторизации terraform в vault используйте токен "education".
@@ -322,6 +533,59 @@ terraform console: >nonsensitive(data.vault_generic_secret.vault_example.data.<�
 ```
 5. Попробуйте самостоятельно разобраться в документации и записать новый секрет в vault с помощью terraform. 
 
+</details>
+
+**Ответ:**
+
+<details><summary>6.4. Вывести ключ</summary>
+
+Пробуем вывести простой командой:
+```terraform
+> data.vault_generic_secret.vault_example
+{
+  "data" = (sensitive value)
+  "data_json" = (sensitive value)
+  "id" = "secret/example"
+  "lease_duration" = 0
+  "lease_id" = ""
+  "lease_renewable" = false
+  "lease_start_time" = "2023-10-01T23:16:07Z"
+  "namespace" = tostring(null)
+  "path" = "secret/example"
+  "version" = -1
+  "with_lease_start_time" = true
+}
+```
+
+Добавляем `nonsensitive`, чтобы получить `sensitive`-данные, Обращаемся к конкретному ключу:
+```terraform
+> nonsensitive(data.vault_generic_secret.vault_example.data)
+tomap({
+  "test" = "congrats!"
+})
+
+> nonsensitive(data.vault_generic_secret.vault_example.data).test
+"congrats!"
+```
+</details>
+
+<details><summary>6.5. Добавить новый ключ через terraform:</summary>
+
+```terraform
+resource "vault_generic_secret" "key" {
+  path = "secret/foo"
+
+  data_json = <<EOT
+{
+  "foo":   "bar",
+  "pizza": "cheese"
+}
+EOT
+}
+```
+
+Результат:
+![img_2.png](img_2.png)
 </details>
 
 ---
