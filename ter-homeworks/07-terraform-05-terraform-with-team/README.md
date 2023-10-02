@@ -117,6 +117,31 @@ YDB
 4. Вставьте в комментарий PR результат анализа tflint и checkov, план изменений инфраструктуры из вывода команды terraform plan.
 5. Пришлите ссылку на PR для ревью. Вливать код в 'terraform-05' не нужно.
 
+<details><summary>3.2. Что сделал</summary>
+
+- добавил ограничение версий для провайдеров yandex и template
+- указал конкретный коммит в качестве источника для удалённого модуля
+- убрал nat
+- добавил security group по примеру из [ДЗ 7-3](https://github.com/P0zitiff4ik/devops-netology/blob/terraform-05/ter-homeworks/07-terraform-03-control-structures/src/security.tf)
+
+```terraform
+terraform {
+  required_providers {
+    yandex = {
+      source  = "yandex-cloud/yandex"
+      version = ">=0.99"
+    }
+    template = {
+      version = "~> 2.0"
+      
+module "test-vm" {
+  source             = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=95c286e0062805d5ba5edb866f387247bc1bbd44"
+  public_ip          = false
+  security_group_ids = [yandex_vpc_security_group.example.id]
+```
+
+</details>
+
 ------
 ### Задание 4
 
