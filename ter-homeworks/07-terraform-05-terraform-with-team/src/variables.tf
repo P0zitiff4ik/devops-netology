@@ -19,3 +19,14 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
+variable "validate-test" {
+  type        = list(string)
+  description = "ip-адрес"
+  validation {
+    condition = can(cidrhost([var.validate-test], 0))
+
+    error_message = "The IP address range is invalid. Must be of format '0.0.0.0/0'."
+  }
+  default = ["192.168.0.1/32", "1.1.1.1/32", "127.0.0.1/32"]
+}
