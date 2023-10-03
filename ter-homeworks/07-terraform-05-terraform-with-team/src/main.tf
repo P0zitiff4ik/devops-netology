@@ -19,15 +19,16 @@ module "vpc_prod" {
 
 
 module "test-vm" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
-  env_name       = "develop"
-  network_id     = module.vpc_dev.vpc_network_id
-  subnet_zones   = [module.vpc_dev.vpc_zone[0]]
-  subnet_ids     = [module.vpc_dev.vpc_subnet_id[0]]
-  instance_name  = "web"
-  instance_count = 1
-  image_family   = "ubuntu-2004-lts"
-  public_ip      = true
+  source             = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=95c286e0062805d5ba5edb866f387247bc1bbd44"
+  env_name           = "develop"
+  network_id         = module.vpc_dev.vpc_network_id
+  subnet_zones       = [module.vpc_dev.vpc_zone[0]]
+  subnet_ids         = [module.vpc_dev.vpc_subnet_id[0]]
+  instance_name      = "web"
+  instance_count     = 1
+  image_family       = "ubuntu-2004-lts"
+  public_ip          = false
+  security_group_ids = [yandex_vpc_security_group.example.id]
 
   metadata = {
     user-data          = data.template_file.cloudinit.rendered
