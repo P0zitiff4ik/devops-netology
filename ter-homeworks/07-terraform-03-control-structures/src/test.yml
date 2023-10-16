@@ -1,4 +1,14 @@
 ---
+- name: Will wait till reachable
+  hosts: all
+  gather_facts: false
+  pre_tasks:
+    - name: Wait for
+      ansible.builtin.wait_for_connection:
+        delay: 10
+        timeout: 300
+    - name: Gather facts for the first time
+      ansible.builtin.setup:
 
 - name: test
   gather_facts: false
