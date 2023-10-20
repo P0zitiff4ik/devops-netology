@@ -1,0 +1,13 @@
+---
+clickhouse:
+  hosts:
+    clickhouse-01:
+      ansible_host: 158.160.48.201
+      ansible_user: ansible
+      ansible_connection: ssh
+vector:
+  hosts:
+    vector-01:
+      ansible_host: 158.160.54.176
+      ansible_user: vector
+      ansible_connection: ssh
