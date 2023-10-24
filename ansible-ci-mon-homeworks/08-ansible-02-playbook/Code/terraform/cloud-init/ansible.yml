@@ -1,7 +1,6 @@
 #cloud-config
 groups:
   - admingroup: [root, sys]
-  - cloud-users
 
 users:
   - default
@@ -16,4 +15,3 @@ package_update: true
 package_upgrade: false
 packages:
   - vim
-  - nginx

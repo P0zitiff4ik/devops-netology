@@ -30,7 +30,7 @@
       rescue:
         - name: Get clickhouse distrib | Rescue
           ansible.builtin.get_url:
-            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.{{ clickhouse_arch }}.rpm"
             dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
             mode: "0755"
     - name: Install clickhouse packages
@@ -69,14 +69,18 @@
         extra_opts:
           - --strip-components=2
         creates: "{{ vector_path }}/bin"
+    - name: Vector to systemd
+      become: true
+      ansible.builtin.copy:
+        src: "{{ vector_path }}/etc/systemd/vector.service"
+        dest: /etc/systemd/system/
+        remote_src: true
+        mode: preserve
     - name: Update environment for vector | Update profile
       ansible.builtin.lineinfile:
         path: "$HOME/.bash_profile"
         search_string: "export PATH"
         line: "export PATH=\"{{ vector_path }}/bin:$PATH\""
-    # - name: Update environment for vector | Update source
-    #   ansible.builtin.shell: "source $HOME/.bash_profile"
-    #   changed_when: false
     - name: Configure Vector | Ensure config directory exists
       ansible.builtin.file:
         path: "{{ vector_config_path }}"
@@ -88,5 +92,12 @@
         mode: "0644"
         dest: "{{ vector_config_path }}/vector.toml"
     - name: Start Vector
-      ansible.builtin.command: "{{ vector_path }}/bin/vector --config {{ vector_config_path }}/vector.toml"
+      ansible.builtin.shell:
+        cmd: "source $HOME/.bash_profile && vector --config {{ vector_config_path }}/vector.toml"
+        executable: /bin/bash
+        stdin: test
       changed_when: false
+      register: vector
+    - name: Vector stdout
+      ansible.builtin.debug:
+        var: vector.stdout
