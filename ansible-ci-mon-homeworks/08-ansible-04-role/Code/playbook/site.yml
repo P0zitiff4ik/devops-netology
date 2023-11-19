@@ -15,19 +15,26 @@
   hosts: clickhouse
   tags: clickhouse
   roles:
-    - role: Clickhouse
+    - role: clickhouse
+  post_tasks:
+    - name: Create clickhouse table
+      ansible.builtin.command:
+        cmd: "clickhouse-client --query 'CREATE TABLE IF NOT EXISTS {{ clickhouse_db }}.{{ table }} {{ table_create_config }};'"
+      register: create_table
+      failed_when: create_table.rc != 0 and create_table.rc != 57
+      changed_when: create_table.rc == 0
 
 - name: Vector
   hosts: vector
-  vars_files: group_vars/clickhouse/clickhouse.yml
+  vars_files: group_vars/clickhouse.yml
   tags: vector
   roles:
-    - role: Vector
+    - role: vector-role
 
 - name: Lighthouse+Nginx
   tags: nginx, lighthouse
   hosts: lighthouse
-  vars_files: group_vars/clickhouse/clickhouse.yml
+  vars_files: group_vars/clickhouse.yml
   become: true
   roles:
-    - role: Lighthouse
+    - role: lighthouse-role

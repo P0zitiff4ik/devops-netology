@@ -1,0 +1,6 @@
+---
+clickhouse_ipv4: "{{ hostvars['clickhouse-01'].ansible_host }}"
+clickhouse_http_port: 8123
+clickhouse_user: "default"
+clickhouse_password: ""
+lighthouse_http_port: 8080

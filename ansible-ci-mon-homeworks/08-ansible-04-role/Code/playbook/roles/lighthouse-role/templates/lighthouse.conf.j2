@@ -1,6 +1,6 @@
 server {
-    listen       {{ lighthouse_port }};
-    listen       [::]:{{ lighthouse_port }};
+    listen       {{ lighthouse_http_port }};
+    listen       [::]:{{ lighthouse_http_port }};
     server_name  {{ ansible_hostname }};
     root         {{ lighthouse_path }};
 
