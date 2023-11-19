@@ -14,12 +14,12 @@ sinks:
     type: clickhouse
     inputs:
       - sample_file
-    endpoint: http://{{ hostvars['clickhouse-01'].ansible_default_ipv4.address }}:{{ clickhouse_port }}
-    database: {{ clickhouse_db }}
+    endpoint: http://{{ hostvars['clickhouse-01'].ansible_default_ipv4.address }}:{{ clickhouse_http_port }}
+    database: {{ clickhouse_dbs_custom.0.name }}
     table: {{ table }}
     auth:
       strategy: basic
-      password: {{ vector_password }}
-      user: {{ vector_user  }}
+      password: {{ clickhouse_users_custom.0.password }}
+      user: {{ clickhouse_users_custom.0.name }}
     skip_unknown_fields: true
     compression: gzip

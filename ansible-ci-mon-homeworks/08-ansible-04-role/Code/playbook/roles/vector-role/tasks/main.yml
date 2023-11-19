@@ -1,12 +1,12 @@
 ---
-- name: Create logs directory
+- name: Ensure logs directory exists
   ansible.builtin.file:
     path: "{{ vector_logs_path }}"
     state: directory
     mode: '0755'
-- name: Create log file
+- name: Create test log file
   ansible.builtin.lineinfile:
-    create: true
+    create: "{{ vector_create_test_file }}"
     path: "{{ vector_logs_path }}/someone.log"
     line: "[ERROR] Some log with trace"
     mode: "0664"
