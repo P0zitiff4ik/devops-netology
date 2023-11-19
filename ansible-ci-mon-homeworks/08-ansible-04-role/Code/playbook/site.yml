@@ -9,7 +9,7 @@
         timeout: 120
     - name: Gather facts for the first time
       ansible.builtin.setup:
-  tags: wait, all-hosts
+  tags: wait, terraform
 
 - name: Clickhouse
   hosts: clickhouse
@@ -26,7 +26,6 @@
 
 - name: Vector
   hosts: vector
-  vars_files: group_vars/clickhouse.yml
   tags: vector
   roles:
     - role: vector-role
@@ -34,7 +33,6 @@
 - name: Lighthouse+Nginx
   tags: nginx, lighthouse
   hosts: lighthouse
-  vars_files: group_vars/clickhouse.yml
   become: true
   roles:
     - role: lighthouse-role
