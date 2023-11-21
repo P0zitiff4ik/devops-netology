@@ -1,4 +1,0 @@
----
-clickhouse_dbs_custom:
-      - { name: logs }
-table: "some_log"

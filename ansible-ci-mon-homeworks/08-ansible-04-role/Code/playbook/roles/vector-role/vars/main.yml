@@ -1,3 +1,1 @@
 ---
-vector_path: "{{ ansible_user_dir }}/vector"
-vector_config_path: "{{ vector_path }}/config"

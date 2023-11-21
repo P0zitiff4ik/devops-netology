@@ -1,14 +1,16 @@
 ---
 # Vector config
 vector_version: "0.33.0"
-vector_arch: "x86_64"
+vector_arch: "{{ ansible_architecture }}"
 vector_logs_path: "{{ ansible_user_dir }}/logs"
+vector_config_path: "{{ ansible_user_dir }}/vector_config"
+# Create or not file for test vector service
 vector_create_test_file: true
 
 # Clickhouse config
-clickhouse_http_port: 8123
+clickhouse_http_port: "{{ hostvars['clickhouse-01'].clickhouse_http_port }}"
 clickhouse_ipv4: "{{ hostvars['clickhouse-01'].ansible_default_ipv4.address }}"
-clickhouse_db: "{{ clickhouse_dbs_custom.0.name }}"
-clickhouse_table: "{{ table }}"
-clickhouse_password: "logger"
-clickhouse_user: "logger"
+clickhouse_db: "{{ hostvars['clickhouse-01'].clickhouse_users_custom.0.dbs.0 }}"
+clickhouse_table: "{{ hostvars['clickhouse-01'].table }}"
+clickhouse_password: "{{ hostvars['clickhouse-01'].clickhouse_users_custom.0.password }}"
+clickhouse_user: "{{ hostvars['clickhouse-01'].clickhouse_users_custom.0.name }}"

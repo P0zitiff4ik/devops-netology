@@ -5,17 +5,11 @@
     state: directory
     mode: '0755'
 - name: Create test log file
-  when: vector_create_test_file is true
   ansible.builtin.lineinfile:
     create: "{{ vector_create_test_file }}"
     path: "{{ vector_logs_path }}/someone.log"
     line: "[ERROR] Some log with trace"
     mode: "0664"
-- name: Ensure vector directory exists
-  ansible.builtin.file:
-    path: "{{ vector_path }}"
-    state: directory
-    mode: "0755"
 - name: Install Vector
   become: true
   ansible.builtin.yum:

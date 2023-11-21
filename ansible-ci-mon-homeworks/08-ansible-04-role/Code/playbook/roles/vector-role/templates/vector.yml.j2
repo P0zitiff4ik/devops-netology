@@ -7,7 +7,7 @@ sources:
     type: file
     read_from: beginning
     ignore_older_secs: 600
-    include:
+    include: 
       - {{ vector_logs_path }}/*.log
 sinks:
   to_clickhouse:

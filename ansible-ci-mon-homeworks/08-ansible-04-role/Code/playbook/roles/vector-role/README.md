@@ -1,7 +1,7 @@
 vector-role
 =========
 
-Role for .
+Role for installation and configure vector.
 
 Requirements
 ------------
