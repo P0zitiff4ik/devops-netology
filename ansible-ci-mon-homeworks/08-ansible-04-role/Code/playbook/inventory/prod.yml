@@ -2,18 +2,18 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: 51.250.72.83
+      ansible_host: 158.160.34.102
       ansible_user: clickhouse
       ansible_connection: ssh
 vector:
   hosts:
     vector-01:
-      ansible_host: 51.250.74.211
+      ansible_host: 130.193.51.190
       ansible_user: vector
       ansible_connection: ssh
 lighthouse:
   hosts:
     lighthouse-01:
-      ansible_host: 51.250.92.86
+      ansible_host: 62.84.126.23
       ansible_user: lighthouse
       ansible_connection: ssh

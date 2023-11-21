@@ -5,6 +5,7 @@
     state: directory
     mode: '0755'
 - name: Create test log file
+  when: vector_create_test_file is true
   ansible.builtin.lineinfile:
     create: "{{ vector_create_test_file }}"
     path: "{{ vector_logs_path }}/someone.log"
@@ -30,6 +31,7 @@
     src: vector.yml.j2
     mode: "0644"
     dest: "{{ vector_config_path }}/vector.yaml"
+  notify: Start Vector service
 - name: Configure Service | Template systemd unit
   become: true
   ansible.builtin.template:

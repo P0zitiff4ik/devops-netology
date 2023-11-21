@@ -11,21 +11,13 @@ clickhouse_profiles_default:
     date_time_input_format: best_effort
     max_partitions_per_insert_block: 100
 clickhouse_users_custom:
-  - name: "logger"
-    password: "logger"
+  - name: logger
+    password: logger
     networks: "{{ clickhouse_networks_default }}"
     profile: "default"
     quota: "default"
     dbs: ["logs"]
 clickhouse_listen_host:
   - "::"
-clickhouse_dbs_custom:
-  - { name: logs }
-clickhouse_http_port:
-  - 8123
-table:
-  - "some_log"
-table_engine:
-  - "Log"
-table_create_config:
-  - ("file" String, "hosts" String, "message" String, "timestamp" DateTime) Engine={{ table_engine }}
+table_engine: "Log"
+table_create_config: "('file' String, 'hosts' String, 'message' String, 'timestamp' DateTime) Engine={{ table_engine }}"
