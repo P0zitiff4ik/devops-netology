@@ -2,7 +2,7 @@
 - name: Will wait till reachable
   hosts: all
   gather_facts: false
-  tasks:
+  pre_tasks:
     - name: Wait for hosts available
       ansible.builtin.wait_for_connection:
         delay: 10
@@ -19,7 +19,7 @@
   post_tasks:
     - name: Create clickhouse table
       ansible.builtin.command:
-        cmd: "clickhouse-client --query 'CREATE TABLE IF NOT EXISTS {{ clickhouse_db }}.{{ table }} {{ table_create_config }};'"
+        cmd: "clickhouse-client --query 'CREATE TABLE IF NOT EXISTS {{ clickhouse_dbs_custom.0.name }}.{{ table }} {{ table_create_config }};'"
       register: create_table
       failed_when: create_table.rc != 0 and create_table.rc != 57
       changed_when: create_table.rc == 0

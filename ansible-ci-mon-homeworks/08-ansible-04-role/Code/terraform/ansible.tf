@@ -19,18 +19,18 @@ resource "null_resource" "web_hosts_provision" {
     command = "eval `ssh-agent -s` && cat ~/.ssh/id_ed25519 | ssh-add -"
   }
 
-  #Запуск ansible-playbook
-  # provisioner "local-exec" {
-  #   command     = "export ANSIBLE_HOST_KEY_CHECKING=False; ansible-playbook -i ${dirname("../playbook/inventory/prod.yml")}/prod.yml ${dirname("../playbook/site.yml")}/site.yml"
-  #   on_failure  = continue #Продолжить выполнение terraform pipeline в случае ошибок
-  #   environment = { ANSIBLE_HOST_KEY_CHECKING = "False" }
-  #   #срабатывание триггера при изменении переменных
-  # }
-  # triggers = {
-  #   always_run        = "${timestamp()}"                                         #всегда т.к. дата и время постоянно изменяются
-  #   playbook_src_hash = file("${dirname("../playbook/site.yml")}/site.yml")      # при изменении содержимого playbook файла
-  #   ssh_public_key    = file("~/.ssh/id_ed25519.pub") # при изменении переменной
+  # Запуск ansible-playbook
+  provisioner "local-exec" {
+    command     = "export ANSIBLE_HOST_KEY_CHECKING=False; ansible-playbook -i ${dirname("../playbook/inventory/prod.yml")}/prod.yml ${dirname("../playbook/site.yml")}/site.yml"
+    on_failure  = continue #Продолжить выполнение terraform pipeline в случае ошибок
+    environment = { ANSIBLE_HOST_KEY_CHECKING = "False" }
+    #срабатывание триггера при изменении переменных
+  }
+  triggers = {
+    always_run        = "${timestamp()}"                                         #всегда т.к. дата и время постоянно изменяются
+    playbook_src_hash = file("${dirname("../playbook/site.yml")}/site.yml")      # при изменении содержимого playbook файла
+    ssh_public_key    = file("~/.ssh/id_ed25519.pub") # при изменении переменной
 
-  # }
+  }
 
 }
