@@ -28,10 +28,10 @@
   hosts: vector
   tags: vector
   roles:
-    - role: vector-role
+    - role: vector
 
 - name: Lighthouse+Nginx
   tags: nginx, lighthouse
   hosts: lighthouse
   roles:
-    - role: lighthouse-role
+    - role: lighthouse
