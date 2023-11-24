@@ -33,6 +33,5 @@
 - name: Lighthouse+Nginx
   tags: nginx, lighthouse
   hosts: lighthouse
-  become: true
   roles:
     - role: lighthouse-role
