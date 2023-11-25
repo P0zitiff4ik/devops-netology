@@ -4,12 +4,12 @@
   scm: git
   version: "1.13"
 
-- name: lighthouse
-  src: git@github.com:P0zitiff4ik/lighthouse-role.git
-  scm: git
-  version: "1.1"
-
 - name: vector
   src: git@github.com:P0zitiff4ik/vector-role.git
   scm: git
   version: "1.1"
+
+- name: lighthouse
+  src: git@github.com:P0zitiff4ik/lighthouse-role.git
+  scm: git
+  version: "1.2"
