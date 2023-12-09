@@ -60,15 +60,15 @@
 
 </summary>
 
-[Bugs Workflow](<Bugs workflow for Netology.xml>)
+[Bugs Workflow](<./files/Bugs workflow for Netology.xml>)
 
-![Bugs Workflow screenshot](<Bugs workflow for Netology.png>)
+![Bugs Workflow screenshot](<./files/Bugs workflow for Netology.png>)
 
 ...
 
-[Main Workflow](<Workflow for Netology.xml>)
+[Main Workflow](<./files/Workflow for Netology.xml>)
 
-![Main Workflow screenshot](<Workflow for Netology.png>)
+![Main Workflow screenshot](<./files/Workflow for Netology.png>)
 
 </details>
 
