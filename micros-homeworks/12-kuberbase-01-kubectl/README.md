@@ -39,8 +39,8 @@
 
 - ```kubectl get nodes```
 
-> ![kubectl get nodes](pic/img.png)
+> ![kubectl get nodes](img/img.png)
 
 - Dashboard
 
-![Dashboard](pic/img_1.png)
+![Dashboard](img/img_1.png)
