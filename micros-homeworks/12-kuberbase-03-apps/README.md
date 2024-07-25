@@ -51,7 +51,9 @@
 Приложения доступны:
 > ![curl](img/curl.png)
 
-...
+P.S. Проблема с портами была решена прописыванием переменных окружения, см. [deployment](kube_manifests/nginx-multitool/deployment.yaml) 
+
+---
 
 ### Задание 2
 
@@ -61,5 +63,4 @@
 После запуска сервиса:
 > ![After_svc](img/After_svc.png)
 
-Файлы манифестов:
-[kube_manifests](kube_manifests)
+P.S. В качестве проверки был использован аргумент command, см. [deployment](kube_manifests/nginx/deployment.yaml)
