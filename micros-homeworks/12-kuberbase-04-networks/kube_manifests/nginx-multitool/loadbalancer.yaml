@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-multitool-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-multitool
+  ports:
+    - port: 80
+      protocol: TCP
+      name: http-nginx
+    - port: 1180
+      protocol: TCP
+      name: http-multitool
