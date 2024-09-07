@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-multitool-deployment
+  namespace: multibox
+  labels:
+    app: busybox-multitool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-multitool
+  template:
+    metadata:
+      labels:
+        app: busybox-multitool
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: multibox-pvc
+      containers:
+        - name: busybox
+          image: busybox:1.24.2
+          command:
+            [
+              "sh",
+              "-c",
+              "while true; do echo $(date) >> /write/date.txt; sleep 5; done",
+            ]
+          volumeMounts:
+            - name: data
+              mountPath: /write
+        - name: multitool
+          image: wbitt/network-multitool
+          volumeMounts:
+            - name: data
+              mountPath: /read
