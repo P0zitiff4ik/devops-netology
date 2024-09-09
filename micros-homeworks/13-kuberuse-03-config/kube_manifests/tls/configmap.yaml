@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx
+data:
+  index.html: |
+    Hello, Netology!
+  https.conf: |
+    server {
+        listen 443 ssl default_server;
+        server_name example.com;
+
+        ssl on;
+        ssl_certificate "/etc/nginx/ssl/tls.crt";
+        ssl_certificate_key "/etc/nginx/ssl/tls.key";
+
+
+        root   /var/www/tls1.3;
+        index   index.html;
+
+    }
+
+    server {
+        listen  80;
+        server_name  example.com;
+        root   /var/www/tls1.3;
+        index   index.html;
+    }

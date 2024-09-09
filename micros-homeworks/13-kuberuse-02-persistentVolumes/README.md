@@ -108,6 +108,6 @@
 > Файл, созданный в pod, удалился только после удаления pvc, но оставался после удаления pod. Причина - политика `reclaimPolicy: Delete` в манифесте создания StorageClass, означающая, что все созданные динамически pv будут удаляться, как и ресурсы, используемые ими на хостовой машине.
 
 Манифесты:
-* [Deployment](kube_manifests/deploy-nfs.yaml)
-* [StorageClass](kube_manifests/sc-nfs.yaml)
-* [PersistentVolumeClaim](kube_manifests/pvc-nfs.yaml)
+* [Deployment](kube_manifests/nfs/deploy-nfs.yaml)
+* [StorageClass](kube_manifests/nfs/sc-nfs.yaml)
+* [PersistentVolumeClaim](kube_manifests/nfs/pvc-nfs.yaml)

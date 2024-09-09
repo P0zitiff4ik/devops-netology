@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multinginx
+data:
+  HTTP_PORT: "1180"
+  index.html: |
+    Hello, Netology!
