@@ -53,9 +53,7 @@ helm create myapp
 #### 2. Убеждаемся, что присутствует deployment и в нём только один компонент:
 
 <details><summary>
-
 templates/deployment.yaml
-
 </summary>
 
 ```yaml
