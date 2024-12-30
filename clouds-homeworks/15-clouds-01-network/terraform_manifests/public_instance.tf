@@ -26,8 +26,9 @@ resource "yandex_compute_instance" "public_instance" {
   }
 
   metadata = {
-    user-data          = templatefile("${path.module}/cloud-init/minimal.tpl", {
+    user-data          = templatefile("${path.module}/cloud-init/privatekey.tpl", {
       ssh_public_key = local.ssh_public_key
+      ssh_private_key_base64 = local.ssh_private_key_base64
       })
     serial-port-enable = 1
   }

@@ -23,3 +23,7 @@ variable "platform" {
 variable "ssh_public_key_path" {
   default     = "~/.ssh/id_ed25519.pub"
 }
+
+variable "ssh_private_key_base64_path" {
+  default     = "~/.ssh/id_ed25519_base64"
+}
