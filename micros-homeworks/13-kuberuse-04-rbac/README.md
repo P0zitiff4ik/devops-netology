@@ -36,7 +36,7 @@
 
 ### Задание 1
 
-1. Проверяем, что RBAC включен:
+#### 1. Проверяем, что RBAC включен:
 
 ```shell
 sudo microk8s enable rbac
@@ -44,7 +44,7 @@ sudo microk8s enable rbac
 
 ![RBAC](img/RBAC.png)
 
-2. Создание и подпись SSL-сертификата
+#### 2. Создание и подпись SSL-сертификата
 
 ```shell
 openssl genrsa -out limited-user.key 2048
@@ -54,7 +54,7 @@ openssl x509 -req -in limited-user.csr -CA /var/snap/microk8s/current/certs/ca.c
 
 ![SSL](img/SSL.png)
 
-3. Настройка конфигурационного файла kubectl
+#### 3. Настройка конфигурационного файла kubectl
 
 ```shell
 kubectl config set-credentials limited-user --client-certificate=limited-user.crt --client-key=limited-user.key
@@ -63,7 +63,7 @@ kubectl config set-context limited-user-context --cluster=microk8s-cluster --nam
 
 ![kubectl](img/kubectl.png)
 
-4. Создаём Service Account и привязываем Secret:
+#### 4. Создаём Service Account и привязываем Secret:
 
 [service-account.yaml](./kube_manifests/service-account.yaml)
 ```yaml
@@ -94,7 +94,7 @@ kubectl create -f secret.yaml
 
 ![SA+Secret](img/SA+Secret.png)
 
-5. Создание роли с ограничением прав и привязка этой роли
+#### 5. Создание роли с ограничением прав и привязка этой роли
 
 [role.yaml](./kube_manifests/role.yaml)
 ```yaml
@@ -142,7 +142,7 @@ kubectl get rolebinding read-pods -o yaml
 
 ![RB check](img/RB_check.png)
 
-6. Проверка доступа
+#### 6. Проверка доступа
 ```shell
 kubectl get pods --as=system:serviceaccount:default:limited-user
 kubectl logs nginx --as=system:serviceaccount:default:limited-user

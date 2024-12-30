@@ -42,7 +42,7 @@
 
 ### Задание 1
 
-1. Создаём структуру Helm-чарта:
+#### 1. Создаём структуру Helm-чарта:
 
 ```shell
 helm create myapp
@@ -50,7 +50,7 @@ helm create myapp
 
 ![helm create](image/helm_create.png)
 
-2. Убеждаемся, что присутствует deployment и в нём только один компонент:
+#### 2. Убеждаемся, что присутствует deployment и в нём только один компонент:
 
 <details><summary>
 
@@ -134,7 +134,7 @@ spec:
 
 ![chart structure](image/chart_structure.png)
 
-3. Образ приложения изменяется в переменных чарта, находящихся в файле `values.yaml` - `image -> tag`
+#### 3. Образ приложения изменяется в переменных чарта, находящихся в файле `values.yaml` - `image -> tag`
 
 ![values.yaml](image/values.png)
 
@@ -146,7 +146,7 @@ spec:
 
 ### Задание 2
 
-1. Создаём namespace'ы
+#### 1. Создаём namespace'ы
 
 ```shell
 kubectl create namespace app1
@@ -155,7 +155,7 @@ kubectl create namespace app2
 
 ![create namespaces](image/create_namespaces.png)
 
-2. Устанавливаем приложение в первом namespace. Используем команду `helm upgrade` вместо `helm install`, так как она более универсальна - при необходимости обновить установленные приложения используется та же самая команда 
+#### 2. Устанавливаем приложение в первом namespace. Используем команду `helm upgrade` вместо `helm install`, так как она более универсальна - при необходимости обновить установленные приложения используется та же самая команда 
 
 ```shell
 helm upgrade --install --atomic myapp1 ./myapp --namespace app1
@@ -163,11 +163,11 @@ helm upgrade --install --atomic myapp1 ./myapp --namespace app1
 
 ![helm install myapp1](image/helm_install_myapp1.png)
 
-3. Меняем `image.tag` в `values.yaml` на `1.24.0`:
+#### 3. Меняем `image.tag` в `values.yaml` на `1.24.0`:
 
 ![change image tag](image/change_image_tag.png)
 
-4. Устанавливаем другую версию этого приложения в том же namespace:
+#### 4. Устанавливаем другую версию этого приложения в том же namespace:
 
 ```shell
 helm upgrade --install --atomic myapp2 ./myapp --namespace app1
@@ -175,7 +175,7 @@ helm upgrade --install --atomic myapp2 ./myapp --namespace app1
 
 ![helm install myapp2](image/helm_install_myapp2.png)
 
-5. Устанавливаем третье приложение в другом namespace:
+#### 5. Устанавливаем третье приложение в другом namespace:
 
 ```shell
 helm upgrade --install --atomic myapp3 ./myapp --namespace app2
